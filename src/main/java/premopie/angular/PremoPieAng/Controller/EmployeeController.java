@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import premopie.angular.PremoPieAng.Repository.EmployeeRepository;
 import premopie.angular.PremoPieAng.Model.Employee;
+import premopie.angular.PremoPieAng.Repository.EmployeeRepository;
 
 
 
 @CrossOrigin(origins = "http://localhost:4200")
+//http://localhost:64809/
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
@@ -31,26 +31,20 @@ public class EmployeeController {
   @Autowired
   EmployeeRepository employeeRepository;
 
-//  @GetMapping("/employees")
-//  public ResponseEntity<List<Employee>> getAllEmployees(@RequestParam(required = false) long employeeid) {
-//    try {
-//      List<Employee> employees = new ArrayList<Employee>();
-//
-//      if (title == null)
-//        employeeRepository.findAll().forEach(employees::add);
-//      else
-//        employeeRepository.findByTitleContaining(title).forEach(employees::add);
-//
-//      if (employees.isEmpty()) {
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//      }
-//
-//      return new ResponseEntity<>(employees, HttpStatus.OK);
-//    } catch (Exception e) {
-//      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//  }
-//
+  @GetMapping("/employees")
+  public ResponseEntity<List<Employee>> getAllEmployees() {
+    try {
+      List<Employee> employees = new ArrayList<Employee>();
+      employeeRepository.findAll().forEach(employees::add);
+      if (employees.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      }
+      return new ResponseEntity<>(employees, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   @GetMapping("/employees/{id}")
   public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") long employeeid) {
     Optional<Employee> employeeData = employeeRepository.findById(employeeid);
@@ -111,10 +105,24 @@ public class EmployeeController {
 
   }
 
-  @GetMapping("/employees/published")
+  @GetMapping("/employees/active")
   public ResponseEntity<List<Employee>> findByActive() {
     try {
       List<Employee> employees = employeeRepository.findByActive(true);
+
+      if (employees.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      }
+      return new ResponseEntity<>(employees, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+  
+  @GetMapping("/employees/inactive")
+  public ResponseEntity<List<Employee>> findByInActive() {
+    try {
+      List<Employee> employees = employeeRepository.findByActive(false);
 
       if (employees.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
