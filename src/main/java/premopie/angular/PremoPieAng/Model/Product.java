@@ -22,7 +22,57 @@ import javax.persistence.Table;
 		private String size;
 
 		@Column(name = "price")
-		private String price;
+		private double price;
+
+		public Product() {
+
+		}
+
+		public Product(String description, String size, double price) {
+			this.description = description;
+			this.size = size;
+			this.price = price;
+
+		}
+		
+		
+		public long getProductid() {
+			return productid;
+		}
+
+		public void setProductid(long productid) {
+			this.productid = productid;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
+		public String getSize() {
+			return size;
+		}
+
+		public void setSize(String size) {
+			this.size = size;
+		}
+
+		public double getPrice() {
+			return price;
+		}
+
+		public void setPrice(double price) {
+			this.price = price;
+		}
+
+		@Override
+		public String toString() {
+			return "Product [productid=" + productid + ", description=" + description + ", size=" + size + ", price="
+					+ price + "]";
+		}
 		
 	}
 		

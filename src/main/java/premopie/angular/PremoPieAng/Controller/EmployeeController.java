@@ -111,7 +111,7 @@ public class EmployeeController {
 
   }
 
-  @GetMapping("/employees/published")
+  @GetMapping("/employees/active")
   public ResponseEntity<List<Employee>> findByActive() {
     try {
       List<Employee> employees = employeeRepository.findByActive(true);
