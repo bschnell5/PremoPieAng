@@ -1,5 +1,7 @@
 package premopie.angular.PremoPieAng.Model;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private long orderid;
-
+		
 		@Column(name = "employeeid")
 		private long employeeid;
 
@@ -22,14 +24,29 @@ import javax.persistence.Table;
 		private long customerid;
 
 		@Column(name = "productid")
-		private long productid;
+		private String productid;
+		
+		@Column(name = "itemsorder")
+		private String itemsorder;
 		
 		@Column(name = "totalprice")
 		private double totalprice;
 		
-		@Column(name = "zip")
-		private int zip;
+		
+		public Orders() {
 
+		}
+
+		public Orders(long employeeid, long customerid, String productid, String itemsorder, double totalprice) {
+			this.employeeid = employeeid;
+			this.customerid = customerid;
+			this.productid = productid;
+			this.itemsorder = itemsorder;
+			this.totalprice = totalprice;
+		}
+
+
+		
 		public long getOrderid() {
 			return orderid;
 		}
@@ -54,12 +71,20 @@ import javax.persistence.Table;
 			this.customerid = customerid;
 		}
 
-		public long getProductid() {
+		public String getProductid() {
 			return productid;
 		}
 
-		public void setProductid(long productid) {
+		public void setProductid(String productid) {
 			this.productid = productid;
+		}
+
+		public String getItemsorder() {
+			return itemsorder;
+		}
+
+		public void setItemsorder(String itemsorder) {
+			this.itemsorder = itemsorder;
 		}
 
 		public double getTotalprice() {
@@ -70,21 +95,13 @@ import javax.persistence.Table;
 			this.totalprice = totalprice;
 		}
 
-		public int getZip() {
-			return zip;
-		}
-
-		public void setZip(int zip) {
-			this.zip = zip;
-		}
-
 		@Override
 		public String toString() {
-			return "Orders [orderid=" + orderid + ", employeeid=" + employeeid + ", customerid=" + customerid
-					+ ", productid=" + productid + ", totalprice=" + totalprice + ", zip=" + zip + "]";
+			return "Order [orderid=" + orderid + ", employeeid=" + employeeid + ", customerid=" + customerid
+					+ ", productid=" + productid + ", itemsorder=" + itemsorder + ", totalprice=" + totalprice + "]";
 		}
-		
-		
-		
+
+	
+
 		
 	}

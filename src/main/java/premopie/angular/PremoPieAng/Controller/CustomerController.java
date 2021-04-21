@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import premopie.angular.PremoPieAng.Repository.CustomerRepository;
 import premopie.angular.PremoPieAng.Model.Customer;
-import premopie.angular.PremoPieAng.Model.Order;
+import premopie.angular.PremoPieAng.Repository.CustomerRepository;
 
 
 
@@ -62,7 +60,7 @@ public class CustomerController {
   public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
     try {
       Customer _customer = customerRepository
-          .save(new Customer(customer.getFirstname(), customer.getLastname(), customer.getAddress(), customer.getZip()));
+          .save(new Customer(customer.getFirstname(), customer.getLastname(),customer.getPhonenumber(), customer.getAddress(), customer.getZip()));
       return new ResponseEntity<>(_customer, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -77,6 +75,7 @@ public class CustomerController {
       Customer _customer = customerData.get();
       _customer.setFirstname(customer.getFirstname());
       _customer.setLastname(customer.getLastname());
+      _customer.setPhonenumber(customer.getPhonenumber());
       _customer.setAddress(customer.getAddress());
       _customer.setZip(customer.getZip());
       return new ResponseEntity<>(customerRepository.save(_customer), HttpStatus.OK);

@@ -15,12 +15,6 @@ import javax.persistence.Table;
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private long customerid;
 		
-		@Column(name = "employeeid")
-		private long employeeid;
-
-		@Column(name = "orderid")
-		private long orderid;
-		
 		@Column(name = "firstname")
 		private String firstname;
 
@@ -40,9 +34,10 @@ import javax.persistence.Table;
 
 		}
 
-		public Customer(String firstname, String lastname, String address, int zip) {
+		public Customer(String firstname, String lastname, String phonenumber, String address, int zip) {
 			this.firstname = firstname;
 			this.lastname = lastname;
+			this.phonenumber = phonenumber;
 			this.address = address;
 			this.zip = zip;
 		}
@@ -53,22 +48,6 @@ import javax.persistence.Table;
 
 		public void setCustomerid(long customerid) {
 			this.customerid = customerid;
-		}
-
-		public long getEmployeeid() {
-			return employeeid;
-		}
-
-		public void setEmployeeid(long employeeid) {
-			this.employeeid = employeeid;
-		}
-
-		public long getOrderid() {
-			return orderid;
-		}
-
-		public void setOrderid(long orderid) {
-			this.orderid = orderid;
 		}
 
 		public String getFirstname() {
@@ -87,6 +66,18 @@ import javax.persistence.Table;
 			this.lastname = lastname;
 		}
 
+		
+		
+		public String getPhonenumber() {
+			return phonenumber;
+		}
+
+		public void setPhonenumber(String phonenumber) {
+			this.phonenumber = phonenumber;
+		}
+
+		
+		
 		public String getAddress() {
 			return address;
 		}
@@ -105,10 +96,11 @@ import javax.persistence.Table;
 
 		@Override
 		public String toString() {
-			return "Customer [customerid=" + customerid + ", employeeid=" + employeeid + ", orderid=" + orderid
-					+ ", firstname=" + firstname + ", lastname=" + lastname + ", address=" + address + ", zip=" + zip
-					+ "]";
+			return "Customer [customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname
+					+ ", phonenumber=" + phonenumber + ", address=" + address + ", zip=" + zip + "]";
 		}
+
+	
 		
 
 }

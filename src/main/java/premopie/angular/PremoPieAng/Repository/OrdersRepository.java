@@ -1,9 +1,16 @@
 package premopie.angular.PremoPieAng.Repository;
 
+//import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import premopie.angular.PremoPieAng.Model.Employee;
+import premopie.angular.PremoPieAng.Model.Orders;
 
-public interface OrdersRepository extends JpaRepository<Employee, Long>  {
+
+
+public interface OrdersRepository extends JpaRepository<Orders, Long> {
+ // List<Order> findByTotalprice(double totalprice);
+  //List<Employee> findByTitleContaining(String title);
+
 
 }
