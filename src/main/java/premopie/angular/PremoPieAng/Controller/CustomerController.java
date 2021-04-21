@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import premopie.angular.PremoPieAng.Repository.CustomerRepository;
 import premopie.angular.PremoPieAng.Model.Customer;
+import premopie.angular.PremoPieAng.Model.Order;
 
 
 
@@ -33,23 +34,17 @@ public class CustomerController {
   CustomerRepository customerRepository;
 
   @GetMapping("/customers")
-  public ResponseEntity<List<Customer>> getAllCustomers(@RequestParam(required = false) String phonenumber) {
+  public ResponseEntity<List<Customer>> getAllCustomers() {
     try {
-      List<Customer> customers = new ArrayList<Customer>();
-
-      if (phonenumber == null)
-        customerRepository.findAll().forEach(customers::add);
-      else
-        customerRepository.findByPhonenumber(phonenumber).forEach(customers::add);
-
-      if (customers.isEmpty()) {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-      }
-
-      return new ResponseEntity<>(customers, HttpStatus.OK);
-    } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    	List<Customer> customers = new ArrayList<Customer>();
+	      customerRepository.findAll().forEach(customers::add);
+	      if (customers.isEmpty()) {
+	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	      }
+	      return new ResponseEntity<>(customers, HttpStatus.OK);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
   }
 
   @GetMapping("/customers/{id}")

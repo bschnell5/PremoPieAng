@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import premopie.angular.PremoPieAng.Repository.OrderRepository;
+import premopie.angular.PremoPieAng.Model.Employee;
 import premopie.angular.PremoPieAng.Model.Order;
 
 
@@ -31,25 +32,19 @@ public class OrderController {
   @Autowired
   OrderRepository orderRepository;
 
-//  @GetMapping("/orders")
-//  public ResponseEntity<List<Order>> getAllOrders(@RequestParam(required = false) String phonenumber) {
-//    try {
-//      List<Order> orders = new ArrayList<Order>();
-//
-//      if (phonenumber == null)
-//        orderRepository.findAll().forEach(orders::add);
-//      else
-//        orderRepository.findByPhonenumber(phonenumber).forEach(orders::add);
-//
-//      if (orders.isEmpty()) {
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//      }
-//
-//      return new ResponseEntity<>(orders, HttpStatus.OK);
-//    } catch (Exception e) {
-//      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//  }
+  @GetMapping("/orders")
+  public ResponseEntity<List<Order>> getAllOrders() {
+	    try {
+	      List<Order> orders = new ArrayList<Order>();
+	      orderRepository.findAll().forEach(orders::add);
+	      if (orders.isEmpty()) {
+	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	      }
+	      return new ResponseEntity<>(orders, HttpStatus.OK);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	  }
 
   @GetMapping("/orders/{id}")
   public ResponseEntity<Order> getOrderById(@PathVariable("id") long orderid) {

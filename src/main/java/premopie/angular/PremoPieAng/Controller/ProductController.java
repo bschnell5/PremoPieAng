@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import premopie.angular.PremoPieAng.Repository.ProductRepository;
+import premopie.angular.PremoPieAng.Model.Employee;
 import premopie.angular.PremoPieAng.Model.Product;
 
 
@@ -31,26 +32,20 @@ public class ProductController {
   @Autowired
   ProductRepository productRepository;
 
-//  @GetMapping("/products")
-//  public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) long productid) {
-//    try {
-//      List<Product> products = new ArrayList<Product>();
-//
-//      if (title == null)
-//        productRepository.findAll().forEach(products::add);
-//      else
-//        productRepository.findByTitleContaining(title).forEach(products::add);
-//
-//      if (products.isEmpty()) {
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//      }
-//
-//      return new ResponseEntity<>(products, HttpStatus.OK);
-//    } catch (Exception e) {
-//      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//  }
-//
+  @GetMapping("/products")
+  public ResponseEntity<List<Product>> getAllProducts() {
+    try {
+    	List<Product> products = new ArrayList<Product>();
+        productRepository.findAll().forEach(products::add);
+        if (products.isEmpty()) {
+          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
+      } catch (Exception e) {
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+  }
+
   @GetMapping("/products/{id}")
   public ResponseEntity<Product> getProductById(@PathVariable("id") long productid) {
     Optional<Product> productData = productRepository.findById(productid);
