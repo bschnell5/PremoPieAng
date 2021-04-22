@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import premopie.angular.PremoPieAng.Repository.ProductRepository;
-import premopie.angular.PremoPieAng.Model.Employee;
 import premopie.angular.PremoPieAng.Model.Product;
+import premopie.angular.PremoPieAng.Repository.ProductRepository;
 
 
 
@@ -61,7 +59,7 @@ public class ProductController {
   public ResponseEntity<Product> createProduct(@RequestBody Product product) {
     try {
       Product _product = productRepository
-          .save(new Product(product.getDescription(), product.getSize(), product.getPrice()));
+          .save(new Product(product.getName(),product.getDescription(), product.getPrice()));
       return new ResponseEntity<>(_product, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,8 +72,8 @@ public class ProductController {
 
     if (productData.isPresent()) {
       Product _product = productData.get();
+      _product.setName(product.getName());
       _product.setDescription(product.getDescription());
-      _product.setSize(product.getSize());
       _product.setPrice(product.getPrice());
       return new ResponseEntity<>(productRepository.save(_product), HttpStatus.OK);
     } else {

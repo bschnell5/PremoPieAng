@@ -1,6 +1,7 @@
 package premopie.angular.PremoPieAng.Model;
 
-import java.util.Arrays;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,30 +24,19 @@ import javax.persistence.Table;
 		@Column(name = "customerid")
 		private long customerid;
 
-		@Column(name = "productid")
-		private String productid;
-		
-		@Column(name = "itemsorder")
-		private String itemsorder;
-		
-		@Column(name = "totalprice")
-		private double totalprice;
-		
+		@Column(name="timeordercreated")
+		private Date timeordercreated;
 		
 		public Orders() {
 
 		}
 
-		public Orders(long employeeid, long customerid, String productid, String itemsorder, double totalprice) {
+		public Orders(long employeeid, long customerid, Date timeordercreated) {
 			this.employeeid = employeeid;
 			this.customerid = customerid;
-			this.productid = productid;
-			this.itemsorder = itemsorder;
-			this.totalprice = totalprice;
+			this.timeordercreated = timeordercreated;
 		}
 
-
-		
 		public long getOrderid() {
 			return orderid;
 		}
@@ -71,37 +61,19 @@ import javax.persistence.Table;
 			this.customerid = customerid;
 		}
 
-		public String getProductid() {
-			return productid;
+		public Date getTimeordercreated() {
+			return timeordercreated;
 		}
 
-		public void setProductid(String productid) {
-			this.productid = productid;
-		}
-
-		public String getItemsorder() {
-			return itemsorder;
-		}
-
-		public void setItemsorder(String itemsorder) {
-			this.itemsorder = itemsorder;
-		}
-
-		public double getTotalprice() {
-			return totalprice;
-		}
-
-		public void setTotalprice(double totalprice) {
-			this.totalprice = totalprice;
+		public void setTimeordercreated(Date timeordercreated) {
+			this.timeordercreated = timeordercreated;
 		}
 
 		@Override
 		public String toString() {
-			return "Order [orderid=" + orderid + ", employeeid=" + employeeid + ", customerid=" + customerid
-					+ ", productid=" + productid + ", itemsorder=" + itemsorder + ", totalprice=" + totalprice + "]";
+			return "Orders [orderid=" + orderid + ", employeeid=" + employeeid + ", customerid=" + customerid
+					+ ", timeordercreated=" + timeordercreated + "]";
 		}
-
-	
 
 		
 	}

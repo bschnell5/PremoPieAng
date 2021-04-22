@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import premopie.angular.PremoPieAng.Repository.OrdersRepository;
-import premopie.angular.PremoPieAng.Model.Employee;
 import premopie.angular.PremoPieAng.Model.Orders;
+import premopie.angular.PremoPieAng.Repository.OrdersRepository;
 
 
 
@@ -61,7 +59,7 @@ public class OrdersController {
   public ResponseEntity<Orders> createOrder(@RequestBody Orders order) {
     try {
       Orders _order = orderRepository
-          .save(new Orders(order.getEmployeeid(), order.getCustomerid(), order.getProductid(), order.getItemsorder(), order.getTotalprice()));
+          .save(new Orders(order.getEmployeeid(), order.getCustomerid(), order.getTimeordercreated()));
       return new ResponseEntity<>(_order, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,9 +74,7 @@ public class OrdersController {
       Orders _order = orderData.get();
       _order.setEmployeeid(order.getEmployeeid());
       _order.setCustomerid(order.getCustomerid());
-      _order.setProductid(order.getProductid());
-      _order.setItemsorder(order.getItemsorder());
-      _order.setTotalprice(order.getTotalprice());
+      _order.setTimeordercreated(order.getTimeordercreated());
       return new ResponseEntity<>(orderRepository.save(_order), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);

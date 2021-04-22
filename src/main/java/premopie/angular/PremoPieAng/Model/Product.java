@@ -15,11 +15,11 @@ import javax.persistence.Table;
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private long productid;
 
+		@Column(name = "name")
+		private String name;
+
 		@Column(name = "description")
 		private String description;
-
-		@Column(name = "size")
-		private String size;
 
 		@Column(name = "price")
 		private double price;
@@ -27,15 +27,17 @@ import javax.persistence.Table;
 		public Product() {
 
 		}
+		
 
-		public Product(String description, String size, double price) {
+		public Product( String name, String description, double price) {
+			this.name = name;
 			this.description = description;
-			this.size = size;
 			this.price = price;
-
 		}
-		
-		
+
+
+
+
 		public long getProductid() {
 			return productid;
 		}
@@ -44,20 +46,20 @@ import javax.persistence.Table;
 			this.productid = productid;
 		}
 
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
 		public String getDescription() {
 			return description;
 		}
 
 		public void setDescription(String description) {
 			this.description = description;
-		}
-
-		public String getSize() {
-			return size;
-		}
-
-		public void setSize(String size) {
-			this.size = size;
 		}
 
 		public double getPrice() {
@@ -70,9 +72,14 @@ import javax.persistence.Table;
 
 		@Override
 		public String toString() {
-			return "Product [productid=" + productid + ", description=" + description + ", size=" + size + ", price="
+			return "Product [productid=" + productid + ", name=" + name + ", description=" + description + ", price="
 					+ price + "]";
 		}
+
+		
+		
+		
+		
 		
 	}
 		
