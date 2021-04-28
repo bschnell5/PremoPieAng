@@ -27,14 +27,18 @@ import javax.persistence.Table;
 		@Column(name="timeordercreated")
 		private Date timeordercreated;
 		
+		@Column(name="total")
+		private double total;
+		
 		public Orders() {
 
 		}
 
-		public Orders(long employeeid, long customerid, Date timeordercreated) {
+		public Orders(long employeeid, long customerid, Date timeordercreated, double total) {
 			this.employeeid = employeeid;
 			this.customerid = customerid;
 			this.timeordercreated = timeordercreated;
+			this.total = total;
 		}
 
 		public long getOrderid() {
@@ -69,11 +73,20 @@ import javax.persistence.Table;
 			this.timeordercreated = timeordercreated;
 		}
 
+		public double getTotal() {
+			return total;
+		}
+
+		public void setTotal(double total) {
+			this.total = total;
+		}
+
 		@Override
 		public String toString() {
 			return "Orders [orderid=" + orderid + ", employeeid=" + employeeid + ", customerid=" + customerid
-					+ ", timeordercreated=" + timeordercreated + "]";
+					+ ", timeordercreated=" + timeordercreated + ", total=" + total + "]";
 		}
-
+		
+		
 		
 	}

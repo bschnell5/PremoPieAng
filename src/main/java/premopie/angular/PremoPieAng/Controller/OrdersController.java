@@ -54,12 +54,24 @@ public class OrdersController {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
+  
+  
+//  @GetMapping("/orders/{id}")
+//  public ResponseEntity<Product> getProductsByOrderId(@PathVariable("id") long orderid) {
+//    Optional<Product> orderData = orderRepository.findById(orderid);
+//
+//    if (orderData.isPresent()) {
+//      return new ResponseEntity<>(orderData.get(), HttpStatus.OK);
+//    } else {
+//      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
+//  }
 
   @PostMapping("/orders")
   public ResponseEntity<Orders> createOrder(@RequestBody Orders order) {
     try {
       Orders _order = orderRepository
-          .save(new Orders(order.getEmployeeid(), order.getCustomerid(), order.getTimeordercreated()));
+          .save(new Orders(order.getEmployeeid(), order.getCustomerid(), order.getTimeordercreated(), order.getTotal()));
       return new ResponseEntity<>(_order, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -75,6 +87,7 @@ public class OrdersController {
       _order.setEmployeeid(order.getEmployeeid());
       _order.setCustomerid(order.getCustomerid());
       _order.setTimeordercreated(order.getTimeordercreated());
+      _order.setTotal(order.getTotal());
       return new ResponseEntity<>(orderRepository.save(_order), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
